@@ -923,8 +923,7 @@ export function AggregatorContainer({ tokenlist }) {
 								borderRadius: '10px',
 								padding: '0rem 1rem',
 								border: 'none',
-								marginBottom: '1rem',
-								height: '3rem'
+								marginBottom: '1rem'
 							}}
 						>
 							<option className="option" value="Etherium">
