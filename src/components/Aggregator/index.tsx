@@ -287,6 +287,16 @@ const ConnectButtonWrapper = styled.div`
 
 const chains = getAllChains();
 
+const marks = {
+	2: <span style={{ color: 'white' }}>2</span>,
+	25: <span style={{ color: 'white' }}>25</span>,
+	50: <span style={{ color: 'white' }}>50</span>,
+	75: <span style={{ color: 'white' }}>75</span>,
+	100: <span style={{ color: 'white' }}>100</span>,
+	125: <span style={{ color: 'white' }}>125</span>,
+	150: <span style={{ color: 'white' }}>150</span>
+};
+
 export function AggregatorContainer({ tokenlist }) {
 	// wallet stuff
 	const { data: signer } = useSigner();
@@ -962,21 +972,25 @@ export function AggregatorContainer({ tokenlist }) {
 						)}
 					</Flex> */}
 					<Flex>
-						{/* <Text as="span" fontWeight="bold" fontSize="1rem" ml="4px">
-							Leverage
-						</Text> */}
+						<Text as="span" fontWeight="bold" fontSize="1rem" ml="4px">
+							Leverage(2x-150x)
+						</Text>
+						<Spacer />
 						<InputNumber
 							style={{ background: '' }}
 							min={0}
 							value={typeof editing.blur === 'number' ? editing.blur : 0}
 							onChange={(newBlur) => setEditing({ ...editing, blur: newBlur })}
 						/>
+						
 					</Flex>
 
 					<Slider
+						marks={marks}
 						trackStyle={{ backgroundColor: '#77911' }}
 						value={typeof editing.blur === 'number' ? editing.blur : 0}
-						max={200}
+						max={150}
+						min={2}
 						onChange={(newblur) => setEditing({ ...editing, blur: newblur })}
 					/>
 
