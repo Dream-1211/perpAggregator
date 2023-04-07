@@ -807,19 +807,19 @@ export function AggregatorContainer({ tokenlist }) {
 
 	return (
 		<Wrapper>
-			<Heading>Meta-Aggregator</Heading>
+			<p>Meta-Aggregator</p>
 
-			<Text fontSize="1rem" fontWeight="500">
+			<p>
 				This product is still in beta. If you run into any issue please let us know in our{' '}
-				<a
+				{/* <a
 					style={{ textDecoration: 'underline' }}
 					target={'_blank'}
 					rel="noreferrer noopener"
 					href="https://github.com/phantom0109"
 				>
 					link goes here
-				</a>
-			</Text>
+				</a> */}
+			</p>
 
 			<BodyWrapper>
 				<Body showRoutes={finalSelectedFromToken && finalSelectedToToken ? true : false}>
@@ -962,9 +962,9 @@ export function AggregatorContainer({ tokenlist }) {
 						)}
 					</Flex> */}
 					<Flex>
-						<Text as="span" fontWeight="bold" fontSize="1rem" ml="4px">
+						{/* <Text as="span" fontWeight="bold" fontSize="1rem" ml="4px">
 							Leverage
-						</Text>
+						</Text> */}
 						<InputNumber
 							style={{ background: '' }}
 							min={0}
@@ -996,7 +996,7 @@ export function AggregatorContainer({ tokenlist }) {
 						slippage={slippage}
 					/>
 
-					{aggregator === 'CowSwap' ? (
+					{/* {aggregator === 'CowSwap' ? (
 						<>
 							{finalSelectedFromToken.value === ethers.constants.AddressZero && Number(slippage) < 2 ? (
 								<Alert status="warning" borderRadius="0.375rem" py="8px">
@@ -1009,7 +1009,7 @@ export function AggregatorContainer({ tokenlist }) {
 								CowSwap orders are fill-or-kill, so they may not execute if price moves quickly against you.
 							</Alert>
 						</>
-					) : null}
+					) : null} */}
 					<Button colorScheme={'yellow'} onClick={onToTokenChange}>
 						Calculate
 					</Button>
