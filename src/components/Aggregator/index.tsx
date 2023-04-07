@@ -118,7 +118,7 @@ const Body = styled.div<{ showRoutes: boolean }>`
 	max-width: 30rem;
 	border: 1px solid #2f333c;
 	align-self: flex-start;
-
+	background: #E9EDF0;
 	z-index: 1;
 
 	@media screen and (min-width: ${({ theme }) => theme.bpLg}) {
@@ -146,7 +146,7 @@ const Wrapper = styled.div`
 	margin: 10px auto 40px;
 	position: relative;
 	top: 36px;
-
+	background: #E9EDF0;
 	h1 {
 		font-weight: 500;
 	}
@@ -1058,7 +1058,7 @@ export function AggregatorContainer({ tokenlist }) {
 														need to reset your approval and approve again`}
 													</Text>
 													<Button
-														isLoading={isApproveResetLoading}
+														isLoading={isApproveResetLoading}  
 														loadingText={isConfirmingResetApproval ? 'Confirming' : 'Preparing transaction'}
 														colorScheme={'messenger'}
 														onClick={() => {
