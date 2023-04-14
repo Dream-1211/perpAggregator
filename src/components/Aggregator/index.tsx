@@ -1,9 +1,9 @@
-import { useMemo, useRef, useState, Fragment, useEffect } from 'react';
+import React, { useMemo, useRef, useState, Fragment, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useAccount, useFeeData, useNetwork, useQueryClient, useSigner, useSwitchNetwork, useToken } from 'wagmi';
 import { useAddRecentTransaction, useConnectModal } from '@rainbow-me/rainbowkit';
 import { ethers } from 'ethers';
-import { Slider, InputNumber } from 'antd';
+import { Slider, InputNumber, Space } from 'antd';
 import BigNumber from 'bignumber.js';
 import { ArrowRight } from 'react-feather';
 import styled from 'styled-components';
@@ -26,7 +26,6 @@ import {
 	background
 } from '@chakra-ui/react';
 import ReactSelect from '~/components/MultiSelect';
-import FAQs from '~/components/FAQs';
 import SwapRoute from '~/components/SwapRoute';
 import { getAllChains, inifiniteApprovalAllowed, swap } from './router';
 import { TokenInput } from './TokenInput';
@@ -280,6 +279,23 @@ const ConnectButtonWrapper = styled.div`
 	}
 `;
 
+
+
+const SelectTag = styled.select`
+	width: '212px',
+	background: '#FCFCFC',
+	color: 'black',
+	height: '52px',
+	borderRadius: '10px',
+	padding: '0rem 1rem',
+	border: 'none',
+	marginBottom: '1rem',
+	marginTop: "7px",
+	&:hover {
+		background-color: transparent;
+	}
+`
+
 const chains = getAllChains();
 
 const marks = {
@@ -287,9 +303,7 @@ const marks = {
 	25: <span style={{ color: 'black' }}>25</span>,
 	50: <span style={{ color: 'black' }}>50</span>,
 	75: <span style={{ color: 'black' }}>75</span>,
-	100: <span style={{ color: 'black' }}>100</span>,
-	125: <span style={{ color: 'black' }}>125</span>,
-	150: <span style={{ color: 'black' }}>150</span>
+	100: <span style={{ color: 'black' }}>100</span>
 };
 
 export function AggregatorContainer({ tokenlist }) {
@@ -824,10 +838,10 @@ export function AggregatorContainer({ tokenlist }) {
 
 				<BodyWrapper>
 					<Body showRoutes={finalSelectedFromToken && finalSelectedToToken ? true : false}>
-						<div>
+						<div >
 							<FormHeader>
 								<Flex>
-									<p style={{ color: '#181B20' }}>Asset Pair</p>
+									<p style={{ color: '#181B20', marginBottom: "20px", fontSize: "20px" }}>Asset Pair</p>
 									{/* <Spacer /> */}
 									{/* <Tooltip content="Redirect requests through the DefiLlama Server to hide your IP address">
 										<FormControl display="flex" alignItems="baseline" gap="6px" justifyContent={'center'}>
@@ -890,13 +904,51 @@ export function AggregatorContainer({ tokenlist }) {
 									selectedChain={selectedChain}
 								/>
 							</TokenSelectBody> */}
-							{/* <Flex as="label" flexDir="column">
-								<Text as="span" fontWeight="bold" fontSize="1rem" ml="4px">
-									Amount In {finalSelectedFromToken?.symbol}
-								</Text>
-								<TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} />
-
-								{balance.isSuccess && balance.data && !Number.isNaN(Number(balance.data.formatted)) ? (
+							<Text as="span" fontWeight="bold" fontSize="1rem" ml="4px" color={'#181B20'}>
+								Collateral
+							</Text>
+							<Flex gap="2">
+								{/* <TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick}  /> */}
+								<input
+									value={100}
+									style={{
+										width: '50%',
+										backgroundColor: 'rgb(0,0,0,0)',
+										borderColor: 'rgb(0,0,0,0)',
+										fontWeight: 'bold',
+										color: '#181B20',
+										fontSize: '40px'
+									}}
+								/>
+								<Space />
+								<select
+									value={selectedOption}
+									onChange={handleOptionChange}
+									// className="selectTag"
+									style={{
+									
+										width: '212px',
+										background: '#FCFCFC',
+										color: 'black',
+										height: '52px',
+										borderRadius: '10px',
+										padding: '0rem 1rem',
+										border: 'none',
+										marginBottom: '1rem',
+										marginTop: "7px"
+										
+									}}
+								>
+									<option className="optionShort" value="Ethereum"
+										style={{backgroundColor: "red"}}
+									>
+										Short
+									</option>
+									<option className="optionLong" value="BSC " style={{backgroundColor: "blue"}}>
+										Long
+									</option>
+								</select>
+								{/* {balance.isSuccess && balance.data && !Number.isNaN(Number(balance.data.formatted)) ? (
 									<Button
 										textDecor="underline"
 										bg="none"
@@ -914,32 +966,7 @@ export function AggregatorContainer({ tokenlist }) {
 									</Button>
 								) : (
 									<Box h="16.8px" mt="8px"></Box>
-								)}
-							</Flex> */}
-							<p style={{ color: 'black' }}>Collateral</p>
-							<Flex>
-								<input />
-								{/* <select
-								value={selectedOption}
-								onChange={handleOptionChange}
-								style={{
-									width: '30%',
-									background: '#0006',
-									color: 'white',
-									height: '2.5rem',
-									borderRadius: '10px',
-									padding: '0rem 1rem',
-									border: 'none',
-									marginBottom: '1rem'
-								}}
-							>
-								<option className="option" value="Etherium">
-									Long
-								</option>
-								<option className="option" value="BSC ">
-									Short
-								</option>
-							</select> */}
+								)} */}
 							</Flex>
 						</SelectWrapper>
 
@@ -970,8 +997,8 @@ export function AggregatorContainer({ tokenlist }) {
 			)}
 		</Flex> */}
 						<Flex>
-							<Text as="span" fontWeight="bold" fontSize="1rem" ml="4px" color={'black'}>
-								Leverage(2x-150x)
+							<Text as="span" fontWeight="bold" fontSize="1rem" ml="4px" mt="2px" mb="4px" color={'black'}>
+								Leverage(2x-100x)
 							</Text>
 							<Spacer />
 							<InputNumber
@@ -986,7 +1013,7 @@ export function AggregatorContainer({ tokenlist }) {
 							marks={marks}
 							trackStyle={{ backgroundColor: '#77911' }}
 							value={typeof editing.blur === 'number' ? editing.blur : 0}
-							max={150}
+							max={100}
 							min={2}
 							onChange={(newblur) => setEditing({ ...editing, blur: newblur })}
 						/>
@@ -1026,7 +1053,7 @@ export function AggregatorContainer({ tokenlist }) {
 						</Button>
 						<SwapWrapper>
 							{!isConnected ? (
-								<Button bgColor={'#2D00FF'} onClick={openConnectModal}>
+								<Button bgColor={'#2D00FF'} onClick={openConnectModal} marginBottom={"20px"}>
 									Connect Wallet
 								</Button>
 							) : !isValidSelectedChain ? (
@@ -1138,7 +1165,9 @@ export function AggregatorContainer({ tokenlist }) {
 					<Routes outes ref={routesRef}>
 						{normalizedRoutes?.length ? (
 							<Flex alignItems="center" justifyContent="space-between">
-								<FormHeader>Select a route to perform a swap </FormHeader>
+								<p style={{ color: '#121212', fontWeight: 'bold', fontSize: '20px' }}>
+									Select a route to perform a swap{' '}
+								</p>
 								<Tooltip2
 									content={`Displayed data will auto-refresh after ${secondsToRefresh} seconds. Click here to update manually`}
 								>
@@ -1303,8 +1332,6 @@ export function AggregatorContainer({ tokenlist }) {
 						))}
 					</Routes>
 				</BodyWrapper>
-
-				<FAQs />
 
 				<TransactionModal open={txModalOpen} setOpen={setTxModalOpen} link={txUrl} />
 			</Wrapper>
