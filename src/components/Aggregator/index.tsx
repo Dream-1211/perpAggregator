@@ -7,6 +7,8 @@ import { Slider, InputNumber, Space } from 'antd';
 import BigNumber from 'bignumber.js';
 import { ArrowRight } from 'react-feather';
 import styled from 'styled-components';
+import Select from "react-select"
+
 import {
 	Heading,
 	useToast,
@@ -23,7 +25,7 @@ import {
 	Alert,
 	AlertIcon,
 	CircularProgress,
-	background
+	background,
 } from '@chakra-ui/react';
 import ReactSelect from '~/components/MultiSelect';
 import SwapRoute from '~/components/SwapRoute';
@@ -279,22 +281,26 @@ const ConnectButtonWrapper = styled.div`
 	}
 `;
 
+const options = [
+	{ value: "Long", label: "Long", color: "#E2000F" },
+	{ value: "Short", label: "Short", color: "#2D00FF"}
+]
 
+const styles = {
+	option: (provided, state) => ({
+		...provided,
+		color: state.isSelected ? "white" : "black",
+		backgroundColor:  state.isSelected ? state.data.color : "white",
+		// width: "212px"
+	}),
+	singleValue: (provided, state) => ({
+		...provided,
+		// color: state.data.color,
+		marginLeft: "2px",
+		width: "212px"
+	})
+}
 
-const SelectTag = styled.select`
-	width: '212px',
-	background: '#FCFCFC',
-	color: 'black',
-	height: '52px',
-	borderRadius: '10px',
-	padding: '0rem 1rem',
-	border: 'none',
-	marginBottom: '1rem',
-	marginTop: "7px",
-	&:hover {
-		background-color: transparent;
-	}
-`
 
 const chains = getAllChains();
 
@@ -838,10 +844,10 @@ export function AggregatorContainer({ tokenlist }) {
 
 				<BodyWrapper>
 					<Body showRoutes={finalSelectedFromToken && finalSelectedToToken ? true : false}>
-						<div >
+						<div>
 							<FormHeader>
 								<Flex>
-									<p style={{ color: '#181B20', marginBottom: "20px", fontSize: "20px" }}>Asset Pair</p>
+									<p style={{ color: '#181B20', marginBottom: '20px', fontSize: '20px' }}>Asset Pair</p>
 									{/* <Spacer /> */}
 									{/* <Tooltip content="Redirect requests through the DefiLlama Server to hide your IP address">
 										<FormControl display="flex" alignItems="baseline" gap="6px" justifyContent={'center'}>
@@ -921,33 +927,7 @@ export function AggregatorContainer({ tokenlist }) {
 									}}
 								/>
 								<Space />
-								<select
-									value={selectedOption}
-									onChange={handleOptionChange}
-									// className="selectTag"
-									style={{
-									
-										width: '212px',
-										background: '#FCFCFC',
-										color: 'black',
-										height: '52px',
-										borderRadius: '10px',
-										padding: '0rem 1rem',
-										border: 'none',
-										marginBottom: '1rem',
-										marginTop: "7px"
-										
-									}}
-								>
-									<option className="optionShort" value="Ethereum"
-										style={{backgroundColor: "red"}}
-									>
-										Short
-									</option>
-									<option className="optionLong" value="BSC " style={{backgroundColor: "blue"}}>
-										Long
-									</option>
-								</select>
+								<Select   options = {options} styles={styles}  />
 								{/* {balance.isSuccess && balance.data && !Number.isNaN(Number(balance.data.formatted)) ? (
 									<Button
 										textDecor="underline"
@@ -1053,7 +1033,7 @@ export function AggregatorContainer({ tokenlist }) {
 						</Button>
 						<SwapWrapper>
 							{!isConnected ? (
-								<Button bgColor={'#2D00FF'} onClick={openConnectModal} marginBottom={"20px"}>
+								<Button bgColor={'#2D00FF'} onClick={openConnectModal} marginBottom={'20px'}>
 									Connect Wallet
 								</Button>
 							) : !isValidSelectedChain ? (
