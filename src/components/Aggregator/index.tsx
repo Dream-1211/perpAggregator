@@ -294,13 +294,12 @@ const styles = {
 	}),
 	control: (provided, state) => ({
 		...provided,
-		width: 212
+		width: 212,
+		height: 10
 	}),
-	singleValue: (provided) => ({
+	singleValue: (provided, state) => ({
 		...provided,
-		// color: state.data.color,
 		marginLeft: "2px",
-		// width: "212px"
 	})
 }
 
@@ -851,19 +850,6 @@ export function AggregatorContainer({ tokenlist }) {
 							<FormHeader>
 								<Flex>
 									<p style={{ color: '#181B20', marginBottom: '20px', fontSize: '20px' }}>Asset Pair</p>
-									{/* <Spacer /> */}
-									{/* <Tooltip content="Redirect requests through the DefiLlama Server to hide your IP address">
-										<FormControl display="flex" alignItems="baseline" gap="6px" justifyContent={'center'}>
-											<FormLabel htmlFor="privacy-switch" margin={0} fontSize="14px" color="gray.400">
-												Hide IP
-											</FormLabel>
-											<Switch
-												id="privacy-switch"
-												onChange={(e) => setIsPrivacyEnabled(e?.target?.checked)}
-												isChecked={isPrivacyEnabled}
-											/>
-										</FormControl>
-									</Tooltip> */}
 								</Flex>
 							</FormHeader>
 							<TokenSelect
@@ -916,7 +902,7 @@ export function AggregatorContainer({ tokenlist }) {
 							<Text as="span" fontWeight="bold" fontSize="1rem" ml="4px" color={'#181B20'}>
 								Collateral
 							</Text>
-							<Flex gap="2">
+							<Flex gap="2" alignItems="center">
 								{/* <TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick}  /> */}
 								<input
 									value={100}
@@ -930,7 +916,7 @@ export function AggregatorContainer({ tokenlist }) {
 									}}
 								/>
 								<Space />
-								<Select   options = {options} styles={styles}  />
+								<Select  options = {options} styles={styles}  />
 								{/* {balance.isSuccess && balance.data && !Number.isNaN(Number(balance.data.formatted)) ? (
 									<Button
 										textDecor="underline"
