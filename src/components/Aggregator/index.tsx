@@ -5,9 +5,10 @@ import { useAddRecentTransaction, useConnectModal } from '@rainbow-me/rainbowkit
 import { ethers } from 'ethers';
 import { Slider, InputNumber, Space } from 'antd';
 import BigNumber from 'bignumber.js';
-import { ArrowRight } from 'react-feather';
+import { AlignCenter, ArrowRight } from 'react-feather';
 import styled from 'styled-components';
-import Select from "react-select"
+import Select from 'react-select';
+import MediaQuery from 'react-responsive';
 
 import {
 	Heading,
@@ -25,7 +26,7 @@ import {
 	Alert,
 	AlertIcon,
 	CircularProgress,
-	background,
+	background
 } from '@chakra-ui/react';
 import ReactSelect from '~/components/MultiSelect';
 import SwapRoute from '~/components/SwapRoute';
@@ -282,15 +283,15 @@ const ConnectButtonWrapper = styled.div`
 `;
 
 const options = [
-	{ value: "Long", label: "Long", color: "#E2000F" },
-	{ value: "Short", label: "Short", color: "#2D00FF"}
-]
+	{ value: 'Long', label: 'Long', color: '#E2000F' },
+	{ value: 'Short', label: 'Short', color: '#2D00FF' }
+];
 
 const styles = {
 	option: (provided, state) => ({
 		...provided,
-		color: state.isSelected ? "white" : "black",
-		backgroundColor:  state.isSelected ? state.data.color : "white",
+		color: state.isSelected ? 'white' : 'black',
+		backgroundColor: state.isSelected ? state.data.color : 'white'
 	}),
 	control: (provided, state) => ({
 		...provided,
@@ -299,10 +300,9 @@ const styles = {
 	}),
 	singleValue: (provided, state) => ({
 		...provided,
-		marginLeft: "2px",
+		marginLeft: '2px'
 	})
-}
-
+};
 
 const chains = getAllChains();
 
@@ -833,16 +833,31 @@ export function AggregatorContainer({ tokenlist }) {
 	};
 	console.log(finalSelectedFromToken);
 	return (
-		<div style={{ marginTop: '100px' }}>
+		<div style={{ marginTop: '100px', minHeight: "100vh"}}>
 			<Wrapper>
-				<div style={{ display: 'flex' }}>
-					<img src="group.png" width="88px" height="73px" style={{ marginLeft: '250px', marginRight: '30px' }} />
-					<p style={{ fontSize: '40px', fontWeight: 'bold', color: 'black' }}>Alpaca</p>
-					<img src="Line1.png" style={{ marginLeft: '70px' }} />
+				<MediaQuery query="(min-width: 1000px)">
+					<div style={{ display: 'flex', justifyContent: 'center' }}>
+						<img src="group.png" width="88px" height="73px" style={{ marginRight: '30px' }} />
+						<p style={{ fontSize: '40px', fontWeight: 'bold', color: 'black' }}>Alpaca</p>
+						<img src="Line1.png" style={{ marginLeft: '70px' }} />
+						<p
+							style={{ color: '#E2000F', fontSize: '30px', fontWeight: 'bold', marginLeft: '70px', marginTop: '15px' }}
+						>
+							PERPETUAL META-AGGREGATOR
+						</p>
+					</div>
+				</MediaQuery>
+				<MediaQuery query="(max-width: 1000px)">
+					<div style={{ display: 'flex', justifyContent: 'center' }}>
+						<img src="group.png" width="88px" height="73px" style={{ marginRight: '30px' }} />
+						<p style={{ fontSize: '40px', fontWeight: 'bold', color: 'black' }}>Alpaca</p>
+					</div>
+					{/* <img src="Line1.png" style={{ marginLeft: '70px' }} /> */}
 					<p style={{ color: '#E2000F', fontSize: '30px', fontWeight: 'bold', marginLeft: '70px', marginTop: '15px' }}>
 						PERPETUAL META-AGGREGATOR
 					</p>
-				</div>
+					{/* </div> */}
+				</MediaQuery>
 
 				<BodyWrapper>
 					<Body showRoutes={finalSelectedFromToken && finalSelectedToToken ? true : false}>
@@ -916,7 +931,7 @@ export function AggregatorContainer({ tokenlist }) {
 									}}
 								/>
 								<Space />
-								<Select  options = {options} styles={styles}  />
+								<Select options={options} styles={styles} />
 								{/* {balance.isSuccess && balance.data && !Number.isNaN(Number(balance.data.formatted)) ? (
 									<Button
 										textDecor="underline"
